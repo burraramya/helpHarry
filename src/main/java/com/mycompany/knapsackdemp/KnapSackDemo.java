@@ -46,6 +46,10 @@ public class KnapSackDemo extends javax.swing.JFrame {
     public Color PURPLE = new Color(128,0,128);
     public Color BROWN = new Color(165,42,42);
 
+    public Color lightGreen = new Color(153,255,153);
+    public Color lightBlue = new Color(153,204,255);
+    public Color lightPink = new Color(229,255,204);
+
     public java.awt.Color[] backgrounds = {Color.RED, Color.YELLOW, Color.BLUE,   Color.ORANGE,Color.GREEN,PURPLE,Color.PINK,BROWN,Color.GRAY,BEIGE};
     public java.awt.Color[] foregrounds = {Color.WHITE, Color.BLACK, Color.WHITE, Color.BLACK,Color.BLACK, Color.BLACK , Color.BLACK , Color.WHITE, Color.BLACK, Color.BLACK};
 
@@ -67,8 +71,15 @@ public class KnapSackDemo extends javax.swing.JFrame {
     public int emptyPanelLength = container_length;
     public int solvedemptyPanelLength = container_length;
     public Dimension headerDimension = new Dimension(1600,50);
+   
+    public Dimension actionButtonDimension = new Dimension(200, 50);
 
     public java.awt.Font buttonFont = new java.awt.Font("Calibri",java.awt.Font.BOLD,16);
+    public java.awt.Font textLabelFont = new java.awt.Font("Cambria",java.awt.Font.PLAIN,12);
+    public java.awt.Font headerLabelFont = new java.awt.Font("Calibri",java.awt.Font.BOLD,14);
+    public java.awt.Font instructionButtonsFont = new java.awt.Font("Apple Chancery",java.awt.Font.PLAIN,19);
+
+
     /**
      * Creates new form KnapSackDemo
      */
@@ -78,7 +89,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
         buttonsPanelDimension = new Dimension(400,100);
 
 
-        final GenerateKnapSack problem = new GenerateKnapSack(container_length);
+        final GenerateKnapSack problem = new GenerateKnapSack(container_length,1);
         System.out.println("Max wieght : " + problem.getMaxWeight());
         System.out.println("Generated Weights");
         for (final int weight : problem.getWeights()) {
@@ -103,8 +114,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
     }
 
     public void setCurrentValuesText() {
-        this.maxWeightLabel.setText("Maximum Weight: " + this.maxWeight);
-        this.currentWeightLabel.setText("Current Weight: " + this.currentWeight);
+        this.maxWeightLabel.setText("Maximum Volume: " + this.maxWeight);
+        this.currentWeightLabel.setText("Current Volume: " + this.currentWeight);
         this.currentValueLabel.setText("Current Value: " + this.currentValue);
 
         // currentValueLabel.setOpaque(false);
@@ -113,11 +124,33 @@ public class KnapSackDemo extends javax.swing.JFrame {
         currentValueLabel.setBackground(transparent);
         maxWeightLabel.setBackground(transparent);
         currentWeightLabel.setBackground(transparent);
+   
+        currentValueLabel.setFont(textLabelFont);
+        currentWeightLabel.setFont(textLabelFont);
+        maxWeightLabel.setFont(textLabelFont);
+        
 
     }
+    
+    public void setSolvedCurrentValuesText() {
+        this.solvedmaxWeightLabel.setText("Maximum Volume: " + this.maxWeight);
+        this.solvedcurrentWeightLabel.setText("Current Volume: " + this.solvedcurrentWeight);
+        this.solvedcurrentValueLabel.setText("Current Value: " + this.solvedcurrentValue);
 
+        // currentValueLabel.setOpaque(false);
+        // maxWeightLabel.setOpaque(false);
+        // currentWeightLabel.setOpaque(false);
+        solvedcurrentValueLabel.setBackground(transparent);
+        solvedmaxWeightLabel.setBackground(transparent);
+        solvedcurrentWeightLabel.setBackground(transparent);
+        
+        solvedcurrentValueLabel.setFont(textLabelFont);
+        solvedcurrentWeightLabel.setFont(textLabelFont);
+        solvedmaxWeightLabel.setFont(textLabelFont);
+
+    }
     public void generateProblem(final int format) {
-        final GenerateKnapSack problem = new GenerateKnapSack(container_length);
+        final GenerateKnapSack problem = new GenerateKnapSack(container_length,format);
         System.out.println("Max wieght : " + problem.getMaxWeight());
         System.out.println("Generated Weights");
         for (final int weight : problem.getWeights()) {
@@ -135,7 +168,9 @@ public class KnapSackDemo extends javax.swing.JFrame {
         this.heights = problem.getHeights();
         baseInitializeBucket();
         setButtonLabels();
-        setCurrentValuesText();
+        setCurrentValuesText(); 
+        setSolvedCurrentValuesText();
+
     }
 
     public void cleanup() {
@@ -151,7 +186,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
         this.solvedcurrentValue = 0;
         this.solvedcurrentWeight = 0;
         closeAllSolvedWeightPanels();
-        //setCurrentValuesText();
+        setSolvedCurrentValuesText();
     }
 
     // public void newProblem() {
@@ -188,6 +223,11 @@ public class KnapSackDemo extends javax.swing.JFrame {
         currentWeightLabel = new javax.swing.JLabel();
         currentValueLabel = new javax.swing.JLabel();
         maxWeightLabel = new javax.swing.JLabel();
+
+        solvedcurrentWeightLabel = new javax.swing.JLabel();
+        solvedcurrentValueLabel = new javax.swing.JLabel();
+        solvedmaxWeightLabel = new javax.swing.JLabel();
+
         jPanel6 = new javax.swing.JPanel();
         solution = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -406,6 +446,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
         newProblemButton.setText("New Level 1 Problem");
         newProblemButton2.setText("New Level 2 Problem");
         solveButton.setText("Solve");
+
+
         // solveButton.setOpaque(false);
         // newProblemButton.setOpaque(false);
         // newProblemButton2.setOpaque(false);
@@ -421,7 +463,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
         maxWeightLabel.setBackground(transparent);
         currentWeightLabel.setBackground(transparent);
 
-        setCurrentValuesText();        
+        setCurrentValuesText();   
+        setSolvedCurrentValuesText();      
         // maxWeightLabel.setText("Maximum Weight: ");
         // currentWeightLabel.setText("Current Weight: ");
 
@@ -432,6 +475,9 @@ public class KnapSackDemo extends javax.swing.JFrame {
         jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.X_AXIS));
         final javax.swing.JPanel labelsPanel = new javax.swing.JPanel();
         labelsPanel.setLayout(new BoxLayout(labelsPanel,BoxLayout.Y_AXIS));
+        JLabel yourSolutionHeader = new JLabel("Your Solution");
+        yourSolutionHeader.setFont(headerLabelFont);
+        labelsPanel.add(yourSolutionHeader);
         labelsPanel.add(maxWeightLabel);
         labelsPanel.add(currentWeightLabel);
         labelsPanel.setMinimumSize(currentValuesPanelDimension);
@@ -439,7 +485,23 @@ public class KnapSackDemo extends javax.swing.JFrame {
         labelsPanel.add(currentValueLabel);
         labelsPanel.setBackground(transparent);
         labelsPanel.setOpaque(false);
+        labelsPanel.setBorder(new EmptyBorder(10,10,10,10));
         
+        final javax.swing.JPanel solvedlabelsPanel = new javax.swing.JPanel();
+        
+        solvedlabelsPanel.setLayout(new BoxLayout(solvedlabelsPanel,BoxLayout.Y_AXIS));
+        JLabel computerSolutionHeader = new JLabel("Computer's Solution");
+        computerSolutionHeader.setFont(headerLabelFont);
+        solvedlabelsPanel.add(computerSolutionHeader);
+        //solvedlabelsPanel.add(new JLabel("Computer Solution"));
+        solvedlabelsPanel.add(solvedmaxWeightLabel);
+        solvedlabelsPanel.add(solvedcurrentWeightLabel);
+        solvedlabelsPanel.setMinimumSize(currentValuesPanelDimension);
+        solvedlabelsPanel.setMaximumSize(currentValuesPanelDimension);
+        solvedlabelsPanel.add(solvedcurrentValueLabel);
+        solvedlabelsPanel.setBackground(transparent);
+        solvedlabelsPanel.setOpaque(false);
+        solvedlabelsPanel.setBorder(new EmptyBorder(10,50,100,10));
 
         final javax.swing.JPanel buttonsPanel = new javax.swing.JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel,BoxLayout.X_AXIS));
@@ -454,16 +516,41 @@ public class KnapSackDemo extends javax.swing.JFrame {
 
         });
 
+        instruuctionsButton.setBackground(lightPink);
+        newProblemButton.setBackground(lightBlue);
+        newProblemButton2.setBackground(lightBlue);
+        solveButton.setBackground(lightGreen);
+
+        instruuctionsButton.setFont(instructionButtonsFont);
+        newProblemButton.setFont(instructionButtonsFont);
+        newProblemButton2.setFont(instructionButtonsFont);
+        solveButton.setFont(instructionButtonsFont);
+
         buttonsPanel.add(instruuctionsButton);
         buttonsPanel.add(newProblemButton);
         buttonsPanel.add(newProblemButton2);
         //buttonsPanel.setMaximumSize(buttonsPanelDimension);
         //buttonsPanel.setMinimumSize(buttonsPanelDimension);
         buttonsPanel.add(solveButton);
+
+
+        newProblemButton.setMaximumSize(actionButtonDimension);
+        newProblemButton2.setMaximumSize(actionButtonDimension);
+        solveButton.setMaximumSize(actionButtonDimension);
+        instruuctionsButton.setMaximumSize(actionButtonDimension);
+
+
+        newProblemButton.setPreferredSize(actionButtonDimension);
+        newProblemButton2.setPreferredSize(actionButtonDimension);
+        solveButton.setPreferredSize(actionButtonDimension);
+        instruuctionsButton.setPreferredSize(actionButtonDimension);
+
+
         buttonsPanel.setBackground(transparent);
         buttonsPanel.setOpaque(false);
         jPanel2.add(labelsPanel);
         jPanel2.add(buttonsPanel);
+        jPanel2.add(solvedlabelsPanel);
         jPanel2.setBackground(transparent);
         jPanel2.setOpaque(false);
 
@@ -845,7 +932,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
             solvedweightPanels[buttonNumer].setVisible(false);
             solvedcurrentWeight = solvedcurrentWeight - weights[buttonNumer];
             solvedcurrentValue = solvedcurrentValue - values[buttonNumer];
-            //setCurrentValuesText();
+            setSolvedCurrentValuesText();
             solvedemptyPanelLength = solvedemptyPanelLength + heights[buttonNumer];
             solvedemptyPanel.setSize(container_width, solvedemptyPanelLength);
             solvedemptyPanel.setMaximumSize(new Dimension(container_width, solvedemptyPanelLength));
@@ -864,7 +951,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
                 solvedemptyPanel.setMaximumSize(new Dimension(container_width, solvedemptyPanelLength));
                 solvedcurrentWeight = solvedcurrentWeight + weights[buttonNumer];
                 solvedcurrentValue = solvedcurrentValue + values[buttonNumer];
-                //setCurrentValuesText();
+                setSolvedCurrentValuesText();
 
             // }
         }
@@ -920,6 +1007,11 @@ public class KnapSackDemo extends javax.swing.JFrame {
     private javax.swing.JLabel currentValueLabel;
     private javax.swing.JLabel currentWeightLabel;
     private javax.swing.JLabel maxWeightLabel;
+
+    private javax.swing.JLabel solvedcurrentValueLabel;
+    private javax.swing.JLabel solvedcurrentWeightLabel;
+    private javax.swing.JLabel solvedmaxWeightLabel;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

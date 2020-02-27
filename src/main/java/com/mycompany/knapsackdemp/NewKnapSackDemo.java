@@ -46,7 +46,7 @@ public class NewKnapSackDemo extends javax.swing.JFrame {
      */
     public NewKnapSackDemo() {
 
-        GenerateKnapSack problem =  new GenerateKnapSack(406);
+        GenerateKnapSack problem =  new GenerateKnapSack(406,1);
         System.out.println("Max wieght : "+ problem.getMaxWeight());
         System.out.println("Generated Weights");
         for(int weight : problem.getWeights()) {
@@ -79,7 +79,7 @@ public class NewKnapSackDemo extends javax.swing.JFrame {
     }
 
     public void generateProblem() {
-        GenerateKnapSack problem =  new GenerateKnapSack(406);
+        GenerateKnapSack problem =  new GenerateKnapSack(406,1);
         System.out.println("Max wieght : "+ problem.getMaxWeight());
         System.out.println("Generated Weights");
         for(int weight : problem.getWeights()) {

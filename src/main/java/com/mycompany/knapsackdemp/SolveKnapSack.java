@@ -80,7 +80,7 @@ public class SolveKnapSack {
         SolveKnapSack sol = new SolveKnapSack(W, wt, val, n);
         //printknapSack(W, wt, val, n); 
         
-        GenerateKnapSack problem =  new GenerateKnapSack(406);
+        GenerateKnapSack problem =  new GenerateKnapSack(406,1);
         // System.out.println("Max wieght : "+ problem.getMaxWeight());
         // System.out.println("Generated Weights");
         // for(int weight : problem.getWeights()) {
