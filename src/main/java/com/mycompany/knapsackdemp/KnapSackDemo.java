@@ -75,8 +75,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
     public Dimension actionButtonDimension = new Dimension(200, 50);
 
     public java.awt.Font buttonFont = new java.awt.Font("Calibri",java.awt.Font.BOLD,16);
-    public java.awt.Font textLabelFont = new java.awt.Font("Cambria",java.awt.Font.PLAIN,12);
-    public java.awt.Font headerLabelFont = new java.awt.Font("Calibri",java.awt.Font.BOLD,14);
+    public java.awt.Font textLabelFont = new java.awt.Font("Cambria",java.awt.Font.PLAIN,14);
+    public java.awt.Font headerLabelFont = new java.awt.Font("Calibri",java.awt.Font.BOLD,16);
     public java.awt.Font instructionButtonsFont = new java.awt.Font("Apple Chancery",java.awt.Font.PLAIN,19);
 
 
@@ -443,8 +443,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
         //         .addContainerGap(65, Short.MAX_VALUE))
         // );
 
-        newProblemButton.setText("New Level 1 Problem");
-        newProblemButton2.setText("New Level 2 Problem");
+        newProblemButton.setText("Level 1");
+        newProblemButton2.setText("Level 2");
         solveButton.setText("Solve");
 
 
@@ -490,7 +490,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
         final javax.swing.JPanel solvedlabelsPanel = new javax.swing.JPanel();
         
         solvedlabelsPanel.setLayout(new BoxLayout(solvedlabelsPanel,BoxLayout.Y_AXIS));
-        JLabel computerSolutionHeader = new JLabel("Computer's Solution");
+        JLabel computerSolutionHeader = new JLabel("Optimal Solution");
         computerSolutionHeader.setFont(headerLabelFont);
         solvedlabelsPanel.add(computerSolutionHeader);
         //solvedlabelsPanel.add(new JLabel("Computer Solution"));
@@ -909,7 +909,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
 
             if (currentWeightCheck(currentWeight + weights[buttonNumer])) {
                 JOptionPane.showMessageDialog(this,
-                        "You can only add upto  " + (maxWeight - currentWeight) + " weight");
+                        "You can only add upto  " + (maxWeight - currentWeight) + " units of volume");
             } else {
                 weightPanels[buttonNumer].setVisible(true);
                 weightPanels[buttonNumer].setSize(container_width, heights[buttonNumer]);
