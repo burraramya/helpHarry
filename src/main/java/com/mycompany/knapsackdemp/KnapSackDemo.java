@@ -30,6 +30,7 @@ public class KnapSackDemo extends javax.swing.JFrame {
     public int currentWeight = 0;
     public int currentValue = 0; 
     public static String imagesFolder = "/Users/i329810/NetBeansProjects1/KnapSackDemp/src/main/java/resources";
+    public boolean disableClick = false;
 
     public int solvedcurrentWeight = 0;
     public int solvedcurrentValue = 0; 
@@ -917,6 +918,9 @@ public class KnapSackDemo extends javax.swing.JFrame {
     }
 
     private void weightButtonActionPerformed(final int buttonNumer) {
+        if(disableClick) {
+            return;
+        }
 
         if (weightPanels[buttonNumer].isVisible()) {
             weightPanels[buttonNumer].setVisible(false);
@@ -1090,30 +1094,33 @@ public class KnapSackDemo extends javax.swing.JFrame {
 
 
     public void disableAllButtons() {
-        weightButton1.setEnabled(false);
-        weightButton2.setEnabled(false);
-        weightButton3.setEnabled(false);
-        weightButton4.setEnabled(false);
-        weightButton5.setEnabled(false);
-        weightButton6.setEnabled(false);
-        weightButton7.setEnabled(false);
-        weightButton8.setEnabled(false);
-        weightButton9.setEnabled(false);
-        weightButton10.setEnabled(false);
+
+        this.disableClick = true; 
+        // weightButton1.setEnabled(false);
+        // weightButton2.setEnabled(false);
+        // weightButton3.setEnabled(false);
+        // weightButton4.setEnabled(false);
+        // weightButton5.setEnabled(false);
+        // weightButton6.setEnabled(false);
+        // weightButton7.setEnabled(false);
+        // weightButton8.setEnabled(false);
+        // weightButton9.setEnabled(false);
+        // weightButton10.setEnabled(false);
     }
 
 
     public void enableAllButtons() {
-        weightButton1.setEnabled(true);
-        weightButton2.setEnabled(true);
-        weightButton3.setEnabled(true);
-        weightButton4.setEnabled(true);
-        weightButton5.setEnabled(true);
-        weightButton6.setEnabled(true);
-        weightButton7.setEnabled(true);
-        weightButton8.setEnabled(true);
-        weightButton9.setEnabled(true);
-        weightButton10.setEnabled(true);
+        this.disableClick = false; 
+        // weightButton1.setEnabled(true);
+        // weightButton2.setEnabled(true);
+        // weightButton3.setEnabled(true);
+        // weightButton4.setEnabled(true);
+        // weightButton5.setEnabled(true);
+        // weightButton6.setEnabled(true);
+        // weightButton7.setEnabled(true);
+        // weightButton8.setEnabled(true);
+        // weightButton9.setEnabled(true);
+        // weightButton10.setEnabled(true);
     }
 
 
