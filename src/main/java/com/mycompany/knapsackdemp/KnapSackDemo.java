@@ -766,7 +766,8 @@ public class KnapSackDemo extends javax.swing.JFrame {
     private void solveKnapSack() {
 
         final SolveKnapSack sol = new SolveKnapSack(this.maxWeight, this.weights, this.values, 10);
-
+        System.out.println();
+        System.out.println("Solving the Problem....");
         int counter = 0;
         for (final int wght : sol.getSolvedWeights()) {
 
@@ -780,14 +781,17 @@ public class KnapSackDemo extends javax.swing.JFrame {
 
             for (int i = 0; i < 10; i++) {
                 if (this.weights[i] == wght) {
+                    System.out.println("Picked Volume: "+ this.weights[i] + ", Value :" + this.values[i]);
                     solveActionButtonPerformed(i);
                     
                     break;
                 }
             }
         }
-
-    }
+        System.out.println("Done Solving");
+        System.out.println("Solved Max Volume: " + this.solvedcurrentWeight);
+        System.out.println("Solved Max Value: " + this.solvedcurrentValue);
+    }   
 
     public void setButtonSizes() {
         final int width = 200;
